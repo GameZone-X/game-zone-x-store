@@ -1,0 +1,21 @@
+// Game Zone X Store — Firestore rules de départ
+// Ces règles permettent à un client connecté de créer sa propre commande
+// et de lire uniquement ses propres commandes.
+// L'accès admin sera ajouté plus tard avec un compte/UID administrateur.
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /orders/{orderId} {
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.status == 'pending_payment';
+
+      allow get, list: if request.auth != null
+                       && resource.data.userId == request.auth.uid;
+
+      allow update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a12">
+  <meta name="description" content="Game Zone X Store — recharge Free Fire MENA et PUBG Mobile Europe à Madagascar.">
+  <title>Game Zone X Store — Recharge Gaming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="authGate" class="auth-gate">
+  <div class="auth-card">
+    <div class="auth-logo"><span class="brand-mark">GZX</span><span>GAME <span>ZONE X</span> STORE</span></div>
+    <div class="auth-badge">🔐 ACCÈS SÉCURISÉ</div>
+    <h1>Bienvenue sur Game Zone X Store</h1>
+    <p>Connecte-toi avec ton compte Google pour accéder au site et à tes commandes.</p>
+    <button id="googleLoginBtn" class="google-login" type="button">
+      <img class="google-logo-img" src="google-logo.png" alt="Google"><span>Continuer avec Google</span>
+    </button>
+    <div class="auth-divider"><span>ou</span></div>
+    <div class="phone-login">
+      <label for="phoneAuthInput">Numéro de téléphone</label>
+      <input id="phoneAuthInput" type="tel" inputmode="tel" autocomplete="tel" placeholder="+261 34 12 345 67">
+      <div id="recaptcha-container"></div>
+      <button id="sendCodeBtn" class="phone-send" type="button">📱 Recevoir le code SMS</button>
+      <div id="codeBox" class="code-box" hidden>
+        <input id="smsCodeInput" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Code à 6 chiffres">
+        <button id="verifyCodeBtn" class="phone-send" type="button">Vérifier le code</button>
+      </div>
+    </div>
+    <p id="authStatus" class="auth-status">Choisis Google ou ton numéro de téléphone.</p>
+    <button id="previewBtn" class="preview-btn" type="button" hidden>👀 Aperçu du site</button>
+  </div>
+</div>
+<div id="appShell" class="app-shell" aria-hidden="true">
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">⚡</span><span><b>GAME <i>ZONE X</i></b><small>STARLINK • BEZAHA</small></span></a>
+  <nav>
+    <a class="active" href="#home">⌂ <span>Accueil</span></a>
+    <a href="#games">🎮 <span>Jeux</span></a>
+    <a href="#services">🛠 <span>Services</span></a>
+    <a href="#project">📡 <span>Projet</span></a>
+    <a href="#how">❔ <span>Aide</span></a>
+  </nav>
+  <div class="top-actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-label="Rechercher">⌕</button>
+    <button class="icon-btn cart-btn" id="historyBtn" type="button" aria-label="Historique des commandes">🛒<i id="notifyDot"></i></button>
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">☀️</button>
+    <div id="userBox" class="user-box" hidden><img id="userPhoto" alt=""><span id="userName"></span><button id="logoutBtn" class="logout-btn" type="button">Déconnexion</button></div>
+    <a class="support" href="#games">👤 Connexion</a>
+  </div>
+</header>
+<main>
+  <section class="hero hero-home" id="home">
+    <div class="hero-copy">
+      <span class="location-pill">📍 BEZAHA • MADAGASCAR</span>
+      <span class="hero-kicker">STARLINK WI-FI • GAME ZONE X STORE</span>
+      <h1>Connectez-vous.<br><em>Rechargez. Jouez.</em></h1>
+      <p>Une expérience simple pour vos recharges gaming et votre zone Wi-Fi Starlink à Bezaha.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#games">📊 Voir les jeux <span>→</span></a>
+        <a class="btn ghost" href="https://wa.me/261341234567" target="_blank" rel="noopener">💬 WhatsApp <span>→</span></a>
+      </div>
+      <div class="trust">
+        <span>✓ UID uniquement</span><span>✓ Paiement sécurisé</span><span>✓ Livraison rapide</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <img src="starlink-dish.jpg" alt="Starlink Wi-Fi Zone à Bezaha">
+      <div class="hero-info-card">
+        <b>📡 Zone Wi-Fi Starlink</b><span>Connexion rapide • Multi-utilisateurs</span><span>Bezaha • Madagascar</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-strip">
+    <div><span>⚡</span><b>Internet haute vitesse</b><small>Navigation fluide et stable</small></div>
+    <div><span>🎟</span><b>Tickets accessibles</b><small>Tarifs adaptés à tous</small></div>
+    <div><span>📱</span><b>Assistance téléphones</b><small>Aide et maintenance</small></div>
+    <div><span>📍</span><b>Zone locale</b><small>Bezaha • Madagascar</small></div>
+  </section>
+
+  <section class="home-grid" id="project">
+    <div class="project-card">
+      <div><span class="eyebrow">LE PROJET</span><h2>Une Zone Wi-Fi Starlink à Bezaha</h2><p>Notre objectif est de proposer une connexion Internet rapide et accessible localement, avec des services pratiques pour les utilisateurs de téléphones.</p><ul><li>Internet haute vitesse</li><li>Tickets accessibles</li><li>Assistance téléphones</li></ul><a class="btn light" href="#how">En savoir plus →</a></div>
+      <div class="project-art"><img src="starlink-dish.jpg" alt="Projet Starlink Bezaha"><span>📡<br><b>BEZAHA</b><small>MADAGASCAR</small></span></div>
+    </div>
+  </section>
+
+<section class="game-menu" id="games">
+    <div class="game-menu-head">
+      <div>
+        <span class="eyebrow">RECHARGE JEUX</span>
+        <h2>Top up vos jeux préférés</h2>
+        <p>Diamants, UC et plus encore. Livraison rapide et sécurisée.</p>
+      </div>
+    </div>
+    <div class="game-grid game-grid-3">
+      <button class="game-card" data-game-target="freefire" type="button">
+        <img src="game-freefire.jpg" alt="Free Fire">
+        <div class="game-overlay"><span>🔥</span><strong>Free Fire</strong><small>Diamants MENA</small></div>
+      </button>
+      <button class="game-card" data-game-target="pubg" type="button">
+        <img src="game-pubg.webp" alt="PUBG Mobile">
+        <div class="game-overlay"><span>🎯</span><strong>PUBG Mobile</strong><small>UC Europe</small></div>
+      </button>
+      <button class="game-card" data-game-target="coming-soon" type="button">
+        <img src="game-bloodstrike.webp" alt="Blood Strike">
+        <div class="game-overlay"><span>🎯</span><strong>Blood Strike</strong><small>Bientôt disponible</small></div>
+      </button>
+    </div>
+  </section>
+
+  <div class="catalog-back-wrap" id="catalogBackWrap">
+    <button class="back-btn" id="backToGames" type="button">← Retour aux jeux</button>
+  </div>
+
+  <section class="section catalog-section" id="freefire">
+    <div class="section-head">
+      <div><span class="eyebrow">FREE FIRE</span><h2>Diamants MENA</h2></div>
+      <span class="region">MENA</span>
+    </div>
+    <div class="products">
+      <button class="product" data-game="Free Fire MENA" data-pack="110 Diamants" data-price="4500">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">110</span><span><b>110 Diamants</b><small>Free Fire MENA</small></span><strong>4 500 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="231 Diamants" data-price="8900">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">231</span><span><b>231 Diamants</b><small>Free Fire MENA</small></span><strong>8 900 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="341 Diamants" data-price="13575">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">341</span><span><b>341 Diamants</b><small>Free Fire MENA</small></span><strong>13 575 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="462 Diamants" data-price="17800">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">462</span><span><b>462 Diamants</b><small>Free Fire MENA</small></span><strong>17 800 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="572 Diamants" data-price="22575">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">572</span><span><b>572 Diamants</b><small>Free Fire MENA</small></span><strong>22 575 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="682 Diamants" data-price="27200">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">682</span><span><b>682 Diamants</b><small>Free Fire MENA</small></span><strong>27 200 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="924 Diamants" data-price="35900">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">924</span><span><b>924 Diamants</b><small>Free Fire MENA</small></span><strong>35 900 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="1 188 Diamants" data-price="44500">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">1188</span><span><b>1 188 Diamants</b><small>Free Fire MENA</small></span><strong>44 500 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="1 529 Diamants" data-price="59000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">1529</span><span><b>1 529 Diamants</b><small>Free Fire MENA</small></span><strong>59 000 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="2 420 Diamants" data-price="89000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">2420</span><span><b>2 420 Diamants</b><small>Free Fire MENA</small></span><strong>89 000 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="3 608 Diamants" data-price="132000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">3608</span><span><b>3 608 Diamants</b><small>Free Fire MENA</small></span><strong>132 000 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="4 290 Diamants" data-price="161575">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">4290</span><span><b>4 290 Diamants</b><small>Free Fire MENA</small></span><strong>161 575 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="5 181 Diamants" data-price="195000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">5181</span><span><b>5 181 Diamants</b><small>Free Fire MENA</small></span><strong>195 000 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="6 028 Diamants" data-price="226703">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">6028</span><span><b>6 028 Diamants</b><small>Free Fire MENA</small></span><strong>226 703 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="10 142 Diamants" data-price="381100">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">10142</span><span><b>10 142 Diamants</b><small>Free Fire MENA</small></span><strong>381 100 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="24 200 Diamants" data-price="880000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">24200</span><span><b>24 200 Diamants</b><small>Free Fire MENA</small></span><strong>880 000 Ar</strong>
+      </button>
+      <button class="product" data-game="Free Fire MENA" data-pack="101 640 Diamants" data-price="3612000">
+        <span class="diamond-icon"><img src="diamond-icon.webp" alt="Diamant"></span><span class="pack">101640</span><span><b>101 640 Diamants</b><small>Free Fire MENA</small></span><strong>3 612 000 Ar</strong>
+      </button>
+
+    <p class="price-note">Tarifs officiels de vente définis pour ton projet.</p>
+  </section>
+
+  <section class="section catalog-section" id="pubg">
+    <div class="section-head">
+      <div><span class="eyebrow">PUBG MOBILE</span><h2>UC Europe</h2></div>
+      <span class="region">EUROPE</span>
+    </div>
+    <div class="products">
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="60 UC" data-price="4200">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">60</span><span><b>60 UC</b><small>PUBG Mobile Europe</small></span><strong>4 200 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="120 UC" data-price="9400">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">120</span><span><b>120 UC</b><small>PUBG Mobile Europe</small></span><strong>9 400 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="180 UC" data-price="12650">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">180</span><span><b>180 UC</b><small>PUBG Mobile Europe</small></span><strong>12 650 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="325 UC" data-price="20900">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">325</span><span><b>325 UC</b><small>PUBG Mobile Europe</small></span><strong>20 900 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="505 UC" data-price="33550">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">505</span><span><b>505 UC</b><small>PUBG Mobile Europe</small></span><strong>33 550 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="660 UC" data-price="41099">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">660</span><span><b>660 UC</b><small>PUBG Mobile Europe</small></span><strong>41 099 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="840 UC" data-price="53749">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">840</span><span><b>840 UC</b><small>PUBG Mobile Europe</small></span><strong>53 749 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="1 165 UC" data-price="75000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">1165</span><span><b>1 165 UC</b><small>PUBG Mobile Europe</small></span><strong>75 000 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="1 800 UC" data-price="99500">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">1800</span><span><b>1 800 UC</b><small>PUBG Mobile Europe</small></span><strong>99 500 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="3 850 UC" data-price="199700">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">3850</span><span><b>3 850 UC</b><small>PUBG Mobile Europe</small></span><strong>199 700 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="8 100 UC" data-price="389000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">8100</span><span><b>8 100 UC</b><small>PUBG Mobile Europe</small></span><strong>389 000 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="16 200 UC" data-price="799000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">16200</span><span><b>16 200 UC</b><small>PUBG Mobile Europe</small></span><strong>799 000 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="24 300 UC" data-price="1199000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">24300</span><span><b>24 300 UC</b><small>PUBG Mobile Europe</small></span><strong>1 199 000 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="32 400 UC" data-price="1625000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">32400</span><span><b>32 400 UC</b><small>PUBG Mobile Europe</small></span><strong>1 625 000 Ar</strong>
+      </button>
+      <button class="product" data-game="PUBG Mobile Europe" data-pack="40 500 UC" data-price="2049000">
+        <span class="uc-icon"><img src="uc-icon.webp" alt="UC PUBG Mobile"></span><span class="pack">40500</span><span><b>40 500 UC</b><small>PUBG Mobile Europe</small></span><strong>2 049 000 Ar</strong>
+      </button>
+    </div>
+  </section>
+
+  <section class="section services-section" id="services">
+    <div class="section-head"><div><span class="eyebrow">MAINTENANCE & SERVICES</span><h2>Services pour vos téléphones</h2></div><span class="section-note">Assistance locale à Bezaha</span></div>
+    <div class="services-grid">
+      <article><span>⟳</span><div><b>Formatage / Réinitialisation</b><strong>À partir de 5 000 Ar</strong></div></article>
+      <article><span>🛡</span><div><b>Déblocage compte Google (FRP)</b><strong>À partir de 10 000 Ar</strong></div></article>
+      <article><span>▶</span><div><b>Création compte Google / Play Store</b><strong>1 000 Ar</strong></div></article>
+      <article><span>⇩</span><div><b>Installation d'application</b><strong>500 Ar / application</strong></div></article>
+    </div>
+  </section>
+
+  <section class="section order-section" id="order">
+    <div class="section-head">
+      <div><span class="eyebrow">COMMANDE</span><h2>Finaliser une recharge</h2></div>
+    </div>
+
+    <div class="order-grid">
+      <form id="orderForm" class="form-card">
+        <div class="selected" id="selectedBox">
+          <span>Produit sélectionné</span>
+          <strong id="selectedProduct">Choisis une offre ci-dessus</strong>
+          <b id="selectedPrice">—</b>
+        </div>
+
+        <label>UID / ID joueur
+          <input id="uid" required inputmode="numeric" placeholder="Ex : 1234567890">
+        </label>
+        <label>Pseudo (facultatif)
+          <input id="nickname" placeholder="Pour vérification">
+        </label>
+        <label>Nom du client
+          <input id="customer" required placeholder="Votre nom">
+        </label>
+        <label>Téléphone / WhatsApp
+          <input id="phone" required inputmode="tel" placeholder="03x xx xxx xx">
+        </label>
+
+        <div class="payment-choice">
+          <span class="field-title">Moyen de paiement</span>
+          <div class="payment-tabs">
+            <button type="button" class="pay-tab active" data-payment="MVola">📱 MVola</button>
+            <button type="button" class="pay-tab" data-payment="Binance Pay">₿ Binance Pay</button>
+          </div>
+          <input type="hidden" id="payment" value="MVola">
+        </div>
+
+        <label id="proofLabel">Référence / preuve de paiement
+          <input id="proof" required placeholder="Référence MVola ou TxID Binance Pay">
+        </label>
+
+        <button class="btn primary full" type="submit">✅ Confirmer ma commande</button>
+        <p class="form-note">Vérifie bien ton UID, ton pack et ton paiement avant de confirmer. Un numéro de commande sera créé pour le suivi.</p>
+      </form>
+
+      <aside class="payment-card">
+        <div class="payment-panel active" id="mvolaPanel">
+          <span class="eyebrow">PAIEMENT RAPIDE</span>
+          <h3>📱 MVola</h3>
+          <div class="pay-number">038 10 932 12</div>
+          <div class="ussd" id="ussdBox">*111*1*2*0381093212*<span>MONTANT</span>*2*0*#</div>
+          <button class="copy-btn" id="copyUssd" type="button">Copier le code</button>
+          <p>Remplace <b>MONTANT</b> par le montant exact de ta commande. Le code USSD affiché ici est celui configuré pour ton projet et doit être vérifié avant publication définitive.</p>
+        </div>
+
+        <div class="payment-panel" id="binancePanel">
+          <span class="eyebrow">PAIEMENT CRYPTO</span>
+          <h3>₿ Binance Pay</h3>
+          <div class="qr-card">
+            <button class="qr-open" id="openBinanceQr" type="button" aria-label="Agrandir le QR Binance Pay">
+              <img src="binance-qr.jpeg" alt="QR Binance Pay — appuie pour agrandir">
+              <span>🔍 Agrandir le QR</span>
+            </button>
+          </div>
+          <div class="crypto-amount" id="cryptoAmount">Sélectionne un pack</div>
+          <p>Ouvre Binance Pay, scanne ce QR puis envoie le montant affiché en USDT. Ensuite, indique le <b>TxID</b> dans le formulaire.</p>
+          <div class="binance-tip">✓ QR officiel fourni pour le paiement • Vérifie toujours le destinataire avant de confirmer.</div>
+        </div>
+
+        <div class="steps">
+          <div><b>01</b><span>Choisis ton pack</span></div>
+          <div><b>02</b><span>Paie avec MVola ou Binance Pay</span></div>
+          <div><b>03</b><span>Indique la référence / TxID</span></div>
+          <div><b>04</b><span>Envoie la commande</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-head">
+      <div><span class="eyebrow">SIMPLE & RAPIDE</span><h2>Comment ça marche ?</h2></div>
+    </div>
+    <div class="how">
+      <div><b>1</b><h3>Choisis</h3><p>Sélectionne ton jeu et ton pack.</p></div>
+      <div><b>2</b><h3>Paye</h3><p>Utilise MVola ou Binance Pay.</p></div>
+      <div><b>3</b><h3>Envoie</h3><p>Donne uniquement ton UID et la référence du paiement.</p></div>
+      <div><b>4</b><h3>Reçois</h3><p>La commande est vérifiée puis traitée.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="brand"><span class="brand-mark">GZX</span><span>GAME <span>ZONE X</span> STORE</span></div>
+  <p>Recharge gaming • Madagascar</p>
+  <small>© 2026 Game Zone X Store. Tous droits réservés.</small>
+</footer>
+
+<div id="binanceQrModal" class="qr-modal" aria-hidden="true">
+  <div class="qr-modal-card" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+    <button class="qr-modal-close" id="closeBinanceQr" type="button" aria-label="Fermer">×</button>
+    <span class="eyebrow">BINANCE PAY</span>
+    <h3 id="qrModalTitle">Scanne le QR pour payer</h3>
+    <img src="binance-qr.jpeg" alt="QR Binance Pay en grand">
+    <p>Après le paiement, copie le <b>TxID</b> et renseigne-le dans ta commande.</p>
+  </div>
+</div>
+
+<div class="modal" id="orderSuccessModal" aria-hidden="true">
+  <div class="modal-card order-success-card">
+    <div class="success-icon">✓</div>
+    <div class="eyebrow">COMMANDE REÇUE</div>
+    <h2>Commande enregistrée 🎉</h2>
+    <p class="success-lead">Conserve ce numéro pour le suivi de ta recharge.</p>
+    <div class="order-number-box">
+      <span>N° de commande</span>
+      <strong id="successOrderId">GZX-—</strong>
+    </div>
+    <div id="successOrderDetails" class="success-details"></div>
+    <div class="success-actions">
+      <button class="btn primary full" id="copyOrderBtn" type="button">📋 Copier les détails</button>
+      <button class="btn ghost full" id="whatsappOrderBtn" type="button">💬 Envoyer sur WhatsApp</button>
+      <button class="close-success" id="closeOrderSuccess" type="button">Retour à la boutique</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="historyModal" aria-hidden="true">
+  <div class="modal-card history-card">
+    <div class="modal-head">
+      <div><span class="eyebrow">MES COMMANDES</span><h3>Historique</h3></div>
+      <button class="close-btn" id="closeHistory" type="button">×</button>
+    </div>
+    <div id="historyList" class="history-list"></div>
+    <button class="btn ghost full" id="clearHistory" type="button">Effacer l’historique</button>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+<script src="app.js"></script>
+</div>
+</body>
+</html>
