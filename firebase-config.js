@@ -1,6 +1,6 @@
-// Game Zone X Store — Firebase configuration
-window.ZONEGAME_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyCjA0L5trJgdrVqQ_nWtpLuBeiS30u0ru4",
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCjAOL5trJgdrVqQ_nWtpLuBeiS30u0ru4",
   authDomain: "game-zone-x-store.firebaseapp.com",
   projectId: "game-zone-x-store",
   storageBucket: "game-zone-x-store.firebasestorage.app",
