@@ -220,3 +220,21 @@ notifyBtn.addEventListener('click',()=>{
   if(history.length) toast(`Dernière commande : ${history[0].game} • ${history[0].pack}`);
   else toast('Aucune nouvelle notification.');
 });
+
+
+// Header V4 — compact mobile menu
+(function(){
+  const menuBtn=document.getElementById('menuBtn');
+  const nav=document.getElementById('mainNav');
+  if(!menuBtn||!nav) return;
+  menuBtn.addEventListener('click',()=>{
+    const open=nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',open?'true':'false');
+    menuBtn.textContent=open?'✕':'☰';
+  });
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+    menuBtn.textContent='☰';
+  }));
+})();

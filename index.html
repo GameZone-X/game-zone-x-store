@@ -35,8 +35,11 @@
 </div>
 <div id="appShell" class="app-shell" aria-hidden="true">
 <header class="topbar">
-  <a class="brand" href="#"><span class="brand-mark">⚡</span><span><b>GAME <i>ZONE X</i></b><small>STARLINK • BEZAHA</small></span></a>
-  <nav>
+  <a class="brand" href="#home" aria-label="Game Zone X Store">
+    <span class="brand-mark">GZX</span>
+    <span class="brand-name"><b>GAME <i>ZONE X</i> STORE</b><small>STARLINK • BEZAHA</small></span>
+  </a>
+  <nav id="mainNav">
     <a class="active" href="#home">⌂ <span>Accueil</span></a>
     <a href="#games">🎮 <span>Jeux</span></a>
     <a href="#services">🛠 <span>Services</span></a>
@@ -49,6 +52,7 @@
     <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">☀️</button>
     <div id="userBox" class="user-box" hidden><img id="userPhoto" alt=""><span id="userName"></span><button id="logoutBtn" class="logout-btn" type="button">Déconnexion</button></div>
     <a class="support" href="#games">👤 Connexion</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
   </div>
 </header>
 <main>

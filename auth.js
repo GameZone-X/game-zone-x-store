@@ -7,6 +7,7 @@
   const userPhoto = document.getElementById('userPhoto');
   const userName = document.getElementById('userName');
   const logoutBtn = document.getElementById('logoutBtn');
+  const supportBtn = document.querySelector('.support');
   const phoneInput = document.getElementById('phoneAuthInput');
   const sendCodeBtn = document.getElementById('sendCodeBtn');
   const codeBox = document.getElementById('codeBox');
@@ -41,6 +42,7 @@
     shell.setAttribute('aria-hidden','false');
     if(user){
       userBox.hidden = false;
+      if(supportBtn) supportBtn.hidden = true;
       const label = user.displayName || user.email || user.phoneNumber || 'Compte connecté';
       userName.textContent = label;
       if(user.photoURL){ userPhoto.src = user.photoURL; userPhoto.hidden = false; }
@@ -52,6 +54,7 @@
     shell.classList.remove('ready');
     shell.setAttribute('aria-hidden','true');
     userBox.hidden = true;
+    if(supportBtn) supportBtn.hidden = false;
   }
 
   if(!configured){
