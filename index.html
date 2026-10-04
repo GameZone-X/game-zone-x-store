@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080a12">
   <meta name="description" content="Game Zone X Store — recharge Free Fire MENA et PUBG Mobile Europe à Madagascar.">
   <title>Game Zone X Store — Recharge Gaming</title>
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=5.2">
 </head>
 <body>
 <div id="authGate" class="auth-gate">
@@ -239,82 +239,7 @@
     </div>
   </section>
 
-  <section class="section order-section" id="order">
-    <div class="section-head">
-      <div><span class="eyebrow">COMMANDE</span><h2>Finaliser une recharge</h2></div>
-    </div>
-
-    <div class="order-grid">
-      <form id="orderForm" class="form-card">
-        <div class="selected" id="selectedBox">
-          <span>Produit sélectionné</span>
-          <strong id="selectedProduct">Choisis une offre ci-dessus</strong>
-          <b id="selectedPrice">—</b>
-        </div>
-
-        <label>UID / ID joueur
-          <input id="uid" required inputmode="numeric" placeholder="Ex : 1234567890">
-        </label>
-        <label>Pseudo (facultatif)
-          <input id="nickname" placeholder="Pour vérification">
-        </label>
-        <label>Nom du client
-          <input id="customer" required placeholder="Votre nom">
-        </label>
-        <label>Téléphone / WhatsApp
-          <input id="phone" required inputmode="tel" placeholder="03x xx xxx xx">
-        </label>
-
-        <div class="payment-choice">
-          <span class="field-title">Moyen de paiement</span>
-          <div class="payment-tabs">
-            <button type="button" class="pay-tab active" data-payment="MVola">📱 MVola</button>
-            <button type="button" class="pay-tab" data-payment="Binance Pay">₿ Binance Pay</button>
-          </div>
-          <input type="hidden" id="payment" value="MVola">
-        </div>
-
-        <label>Référence / preuve de paiement
-          <input id="proof" placeholder="Référence MVola ou TxID Binance Pay">
-        </label>
-
-        <button class="btn primary full" type="submit">Préparer ma commande →</button>
-        <p class="form-note">Après validation, les détails sont préparés pour WhatsApp. La recharge est effectuée après vérification du paiement.</p>
-      </form>
-
-      <aside class="payment-card">
-        <div class="payment-panel active" id="mvolaPanel">
-          <span class="eyebrow">PAIEMENT RAPIDE</span>
-          <h3>📱 MVola</h3>
-          <div class="pay-number">038 10 932 12</div>
-          <div class="ussd" id="ussdBox">*111*1*2*0381093212*<span>MONTANT</span>*2*0*#</div>
-          <button class="copy-btn" id="copyUssd" type="button">Copier le code</button>
-          <p>Remplace <b>MONTANT</b> par le montant exact de ta commande. Le code USSD affiché ici est celui configuré pour le paiement et doit être vérifié avant publication définitive.</p>
-        </div>
-
-        <div class="payment-panel" id="binancePanel">
-          <span class="eyebrow">PAIEMENT CRYPTO</span>
-          <h3>₿ Binance Pay</h3>
-          <div class="qr-card">
-            <button class="qr-open" id="openBinanceQr" type="button" aria-label="Agrandir le QR Binance Pay">
-              <img src="binance-qr.jpeg" alt="QR Binance Pay — appuie pour agrandir">
-              <span>🔍 Agrandir le QR</span>
-            </button>
-          </div>
-          <div class="crypto-amount" id="cryptoAmount">Sélectionne un pack</div>
-          <p>Ouvre Binance Pay, scanne ce QR puis envoie le montant affiché en USDT. Ensuite, indique le <b>TxID</b> dans le formulaire.</p>
-          <div class="binance-tip">✓ QR officiel fourni pour le paiement • Vérifie toujours le destinataire avant de confirmer.</div>
-        </div>
-
-        <div class="steps">
-          <div><b>01</b><span>Choisis ton pack</span></div>
-          <div><b>02</b><span>Paie avec MVola ou Binance Pay</span></div>
-          <div><b>03</b><span>Indique la référence / TxID</span></div>
-          <div><b>04</b><span>Envoie la commande</span></div>
-        </div>
-      </aside>
-    </div>
-  </section>
+  
 
   <section class="section" id="how">
     <div class="section-head">
