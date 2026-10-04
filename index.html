@@ -47,7 +47,7 @@
   </nav>
   <div class="top-actions">
     <button class="icon-btn" id="searchBtn" type="button" aria-label="Rechercher">⌕</button>
-    <button class="icon-btn cart-btn" id="historyBtn" type="button" aria-label="Historique des commandes">🛒<i id="notifyDot"></i></button>
+    <button class="icon-btn cart-btn" id="historyBtn" type="button" aria-label="Ouvrir le panier">🛒<i id="cartCount" class="cart-count" hidden>0</i></button>
     <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">☀️</button>
     <div id="userBox" class="user-box" hidden><img id="userPhoto" alt=""><span id="userName"></span><button id="logoutBtn" class="logout-btn" type="button">Déconnexion</button></div>
     <a class="support" href="#games">👤 Connexion</a>
@@ -356,11 +356,52 @@
   </div>
 </div>
 <div id="toast" class="toast"></div>
+<!-- Panier / tiroir mobile -->
+<div id="cartDrawer" class="drawer" aria-hidden="true">
+  <div class="drawer-panel">
+    <div class="drawer-head"><div><span class="eyebrow">MON PANIER</span><h2>Votre commande</h2></div><button id="closeCart" class="drawer-close" type="button">×</button></div>
+    <div id="cartEmpty" class="cart-empty"><div>🛒</div><b>Ton panier est vide</b><span>Choisis un pack pour commencer.</span></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">0 Ar</strong></div>
+    <div class="drawer-actions"><button id="clearCart" class="btn ghost" type="button">Vider</button><button id="continueCart" class="btn primary" type="button">Poursuivre →</button></div>
+  </div>
+</div>
+
+<!-- Étape identifiants + paiement -->
+<div id="checkoutDrawer" class="drawer" aria-hidden="true">
+  <div class="drawer-panel checkout-panel">
+    <div class="drawer-head"><div><span class="eyebrow">FINALISER</span><h2>Informations de commande</h2></div><button id="closeCheckout" class="drawer-close" type="button">×</button></div>
+    <div class="checkout-steps"><span class="active">1</span><i></i><span class="active">2</span><i></i><span>3</span></div>
+    <div id="checkoutSummary" class="checkout-summary"></div>
+    <form id="checkoutForm" class="checkout-form">
+      <div class="checkout-block"><div class="block-title">🎮 1 — Identifiants du jeu</div>
+        <label>UID / ID joueur *<input id="checkoutUid" required inputmode="numeric" placeholder="Ex : 1234567890"></label>
+        <label>Pseudo (facultatif)<input id="checkoutNick" placeholder="Nom dans le jeu"></label>
+      </div>
+      <div class="checkout-block"><div class="block-title">👤 2 — Coordonnées</div>
+        <label>Nom du client *<input id="checkoutCustomer" required placeholder="Votre nom"></label>
+        <label>Téléphone / WhatsApp *<input id="checkoutPhone" required inputmode="tel" placeholder="03x xx xxx xx"></label>
+      </div>
+      <div class="checkout-block"><div class="block-title">💳 3 — Paiement</div>
+        <div class="checkout-payments"><button type="button" class="checkout-pay active" data-payment="MVola">📱 MVola</button><button type="button" class="checkout-pay" data-payment="Binance Pay">₿ Binance Pay</button></div>
+        <input type="hidden" id="checkoutPayment" value="MVola">
+        <div id="checkoutMvola" class="checkout-payment-panel active"><b>038 10 932 12</b><div class="checkout-ussd">*111*1*2*0381093212*<span id="checkoutUssdAmount">MONTANT</span>*2*0*#</div><button id="checkoutCopyUssd" type="button" class="copy-btn">Copier le code MVola</button></div>
+        <div id="checkoutBinance" class="checkout-payment-panel"><img src="binance-qr.jpeg" alt="QR Binance Pay"><p>Scanne le QR puis indique le TxID ci-dessous.</p></div>
+        <label>Référence / preuve de paiement<input id="checkoutProof" placeholder="Référence MVola ou TxID Binance Pay"></label>
+      </div>
+      <div class="checkout-final"><span>Total</span><strong id="checkoutTotal">0 Ar</strong></div>
+      <button class="btn primary full" type="submit">Envoyer ma commande →</button>
+      <button id="backToCart" class="btn ghost full" type="button">← Retour au panier</button>
+    </form>
+  </div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="auth.js"></script>
 <script src="app.js"></script>
+<script src="cart-ui.js"></script>
 </div>
 </body>
 </html>

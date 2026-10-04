@@ -193,6 +193,7 @@ function renderHistory(){
 }
 
 document.getElementById('historyBtn').addEventListener('click',()=>{
+  if(window.GZXCart) return;
   renderHistory();
   document.getElementById('historyModal').classList.add('open');
   document.getElementById('historyModal').setAttribute('aria-hidden','false');
