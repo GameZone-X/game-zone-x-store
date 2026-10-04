@@ -1,27 +1,46 @@
-# Game Zone X Store — Commandes + Firestore
+# ZoneGame — version améliorée
 
-Cette version connecte le formulaire de commande à la collection Firestore `orders` du projet `game-zone-x-store`.
+Cette version améliore directement ton site existant, sans repartir sur un autre projet.
 
-## Ce qui est ajouté
-- Enregistrement réel des commandes dans Firestore pour les utilisateurs connectés.
-- Mapping exact vers les champs : `orderId`, `userId`, `customerName`, `phone`, `game`, `playerId`, `playerName`, `pack`, `price`, `paymentMethod`, `transactionRef`, `status`.
-- `createdAt` est ajouté automatiquement avec un timestamp Firestore.
-- Statut initial : `pending_payment`.
-- L'historique local reste disponible pour le client.
-- En aperçu local (`file://`), une commande est enregistrée uniquement dans le navigateur afin de tester l'interface sans contourner Firestore.
-- Firebase Authentication Google + téléphone reste actif.
+### Ajouts
+- Mode sombre / clair avec mémorisation.
+- Paiement MVola : **038 10 932 12**.
+- Paiement Binance Pay avec ton QR.
+- Sélection MVola / Binance Pay dans le formulaire.
+- Calcul indicatif du montant USDT.
+- Bouton pour copier le code USSD.
+- Tarifs Free Fire MENA :
+  - 110 = 4 500 Ar
+  - 231 = 8 900 Ar
+  - 583 = 22 400 Ar
+  - 1 188 = 44 500 Ar
+  - 2 420 = 88 500 Ar
+- Design mobile plus propre.
 
-## Règles Firestore
-Le fichier `firestore.rules` contient une règle de départ :
-- un utilisateur connecté peut créer sa propre commande ;
-- il peut lire uniquement ses propres commandes ;
-- aucune modification/suppression côté client.
+### Important
+Le site reste un frontend statique : il ne vérifie pas automatiquement les paiements et ne recharge pas automatiquement les comptes.
 
-Dans Firebase Console → Firestore → Règles, colle le contenu de `firestore.rules`, puis publie les règles.
+Le code USSD affiché dans la page est celui configuré pour ton projet. Vérifie-le avec MVola avant publication définitive.
 
-## Important
-La version locale ne peut pas effectuer un vrai enregistrement Firestore sans authentification valide et sans règles autorisant l'écriture. Pour tester l'écriture réelle, le site doit être servi en HTTPS/HTTP (par exemple Firebase Hosting) et le client doit être connecté.
+Pour WhatsApp, ouvre `app.js` et remplace :
+`261XXXXXXXXX`
+par ton numéro WhatsApp professionnel au format international, sans `+` ni espaces.
 
-Ne mets jamais une clé secrète de fournisseur de recharge dans le JavaScript du navigateur. Une future automatisation de recharge fournisseur devra passer par un backend sécurisé.
+Pour une automatisation complète plus tard : backend + paiement MVola/API + vérification Binance Pay + API fournisseur.
 
-Le code USSD MVola affiché dans l'interface doit être vérifié auprès de MVola avant publication définitive.
+### Menu accueil
+Ordre des jeux : Free Fire, PUBG Mobile, Blood Strike, Mobile Legends, Delta Force. Aucun tarif Free Fire n'est affiché dans le menu accueil; les tarifs restent dans la section de recharge après sélection.
+
+### Menu accueil actuel
+3 jeux uniquement : Free Fire, PUBG Mobile, Blood Strike. Blood Strike est marqué « Bientôt disponible ». Les anciennes images du menu ont été supprimées.
+
+### Affichage des tarifs
+Au chargement de l'accueil, aucun tarif Free Fire ou PUBG n'est affiché. Le client doit d'abord choisir Free Fire ou PUBG Mobile dans le menu « Choisis le jeu à commander » pour afficher le catalogue et les tarifs correspondants.
+
+## Connexion Google
+Le site contient une porte d'accès Google avec Firebase Authentication. Pour l'activer, renseigne les valeurs de ton projet Firebase dans `firebase-config.js`, puis active Google dans Firebase Authentication > Sign-in method. Ajoute également le domaine de ton site dans Authorized domains.
+
+
+## Connexion Google + téléphone
+La page d'accès propose maintenant deux méthodes : Google et numéro de téléphone par SMS (OTP).
+Dans Firebase Authentication, active **Google** et **Phone / Téléphone**. Pour le téléphone, utilise le format international, par exemple `+261341234567`. Firebase utilise reCAPTCHA pour protéger l'envoi des SMS.

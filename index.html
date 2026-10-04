@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#080a12">
   <meta name="description" content="Game Zone X Store — recharge Free Fire MENA et PUBG Mobile Europe à Madagascar.">
   <title>Game Zone X Store — Recharge Gaming</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <div id="authGate" class="auth-gate">
@@ -277,12 +277,12 @@
           <input type="hidden" id="payment" value="MVola">
         </div>
 
-        <label id="proofLabel">Référence / preuve de paiement
-          <input id="proof" required placeholder="Référence MVola ou TxID Binance Pay">
+        <label>Référence / preuve de paiement
+          <input id="proof" placeholder="Référence MVola ou TxID Binance Pay">
         </label>
 
-        <button class="btn primary full" type="submit">✅ Confirmer ma commande</button>
-        <p class="form-note">Vérifie bien ton UID, ton pack et ton paiement avant de confirmer. Un numéro de commande sera créé pour le suivi.</p>
+        <button class="btn primary full" type="submit">Préparer ma commande →</button>
+        <p class="form-note">Après validation, les détails sont préparés pour WhatsApp. La recharge est effectuée après vérification du paiement.</p>
       </form>
 
       <aside class="payment-card">
@@ -348,25 +348,6 @@
   </div>
 </div>
 
-<div class="modal" id="orderSuccessModal" aria-hidden="true">
-  <div class="modal-card order-success-card">
-    <div class="success-icon">✓</div>
-    <div class="eyebrow">COMMANDE REÇUE</div>
-    <h2>Commande enregistrée 🎉</h2>
-    <p class="success-lead">Conserve ce numéro pour le suivi de ta recharge.</p>
-    <div class="order-number-box">
-      <span>N° de commande</span>
-      <strong id="successOrderId">GZX-—</strong>
-    </div>
-    <div id="successOrderDetails" class="success-details"></div>
-    <div class="success-actions">
-      <button class="btn primary full" id="copyOrderBtn" type="button">📋 Copier les détails</button>
-      <button class="btn ghost full" id="whatsappOrderBtn" type="button">💬 Envoyer sur WhatsApp</button>
-      <button class="close-success" id="closeOrderSuccess" type="button">Retour à la boutique</button>
-    </div>
-  </div>
-</div>
-
 <div class="modal" id="historyModal" aria-hidden="true">
   <div class="modal-card history-card">
     <div class="modal-head">
@@ -380,7 +361,6 @@
 <div id="toast" class="toast"></div>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script src="auth.js"></script>
 <script src="app.js"></script>

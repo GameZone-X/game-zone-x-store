@@ -15,7 +15,6 @@
   const cfg = window.ZONEGAME_FIREBASE_CONFIG || {};
   const previewBtn = document.getElementById('previewBtn');
   const isLocalPreview = (location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
-  let previewMode = false;
   if(isLocalPreview && previewBtn){
     previewBtn.hidden = false;
     previewBtn.addEventListener('click', () => {
@@ -30,6 +29,7 @@
   const configured = cfg.apiKey && cfg.projectId && cfg.appId && !String(cfg.apiKey).includes('REMPLACE');
   let confirmationResult = null;
   let recaptchaVerifier = null;
+  let previewMode = false;
 
   function setStatus(msg, error=false){
     status.textContent = msg;
