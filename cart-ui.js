@@ -1,6 +1,5 @@
 (function(){
   const CART_KEY='gzx-cart-v1';
-  // V5.3: checkout stays hidden until the user opens the cart and continues.
   const cart=[];
   const money=n=>new Intl.NumberFormat('fr-FR').format(n)+' Ar';
   const load=()=>{try{const x=JSON.parse(localStorage.getItem(CART_KEY)||'[]'); if(Array.isArray(x)) cart.push(...x)}catch{}};
