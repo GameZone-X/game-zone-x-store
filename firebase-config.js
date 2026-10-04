@@ -1,4 +1,5 @@
-// Game Zone X Store — Firebase configuration
+// IMPORTANT: garde ta vraie clé API Firebase ici.
+// Remplace uniquement la valeur apiKey par celle déjà utilisée dans ton GitHub actuel.
 window.ZONEGAME_FIREBASE_CONFIG = {
   apiKey: "AIzaSyCjAOL5trJgdrVqQ_nWtpLuBeiS30u0ru4",
   authDomain: "game-zone-x-store.firebaseapp.com",
