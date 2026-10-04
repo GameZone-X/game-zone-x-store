@@ -1,141 +1,32 @@
 (function(){
-  const gate = document.getElementById('authGate');
-  const shell = document.getElementById('appShell');
-  const btn = document.getElementById('googleLoginBtn');
-  const status = document.getElementById('authStatus');
-  const userBox = document.getElementById('userBox');
-  const userPhoto = document.getElementById('userPhoto');
-  const userName = document.getElementById('userName');
-  const logoutBtn = document.getElementById('logoutBtn');
-  const supportBtn = document.querySelector('.support');
-  const phoneInput = document.getElementById('phoneAuthInput');
-  const sendCodeBtn = document.getElementById('sendCodeBtn');
-  const codeBox = document.getElementById('codeBox');
-  const smsCodeInput = document.getElementById('smsCodeInput');
-  const verifyCodeBtn = document.getElementById('verifyCodeBtn');
-  const cfg = window.ZONEGAME_FIREBASE_CONFIG || {};
-  const previewBtn = document.getElementById('previewBtn');
-  const isLocalPreview = (location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
-  if(isLocalPreview && previewBtn){
-    previewBtn.hidden = false;
-    previewBtn.addEventListener('click', () => {
-      previewMode = true;
-      gate.classList.add('hidden');
-      shell.classList.add('ready');
-      shell.setAttribute('aria-hidden','false');
-      window.scrollTo(0,0);
-      if(typeof window.initAppPreview === 'function') window.initAppPreview();
-    });
-  }
-  const configured = cfg.apiKey && cfg.projectId && cfg.appId && !String(cfg.apiKey).includes('REMPLACE');
-  let confirmationResult = null;
-  let recaptchaVerifier = null;
-  let previewMode = false;
-
-  function setStatus(msg, error=false){
-    status.textContent = msg;
-    status.classList.toggle('error', error);
-  }
-  function showApp(user){
-    gate.classList.add('hidden');
-    shell.classList.add('ready');
-    shell.setAttribute('aria-hidden','false');
-    if(user){
-      userBox.hidden = false;
-      if(supportBtn) supportBtn.hidden = true;
-      const label = user.displayName || user.email || user.phoneNumber || 'Compte connecté';
-      userName.textContent = label;
-      if(user.photoURL){ userPhoto.src = user.photoURL; userPhoto.hidden = false; }
-      else userPhoto.hidden = true;
-    }
-  }
-  function showGate(){
-    gate.classList.remove('hidden');
-    shell.classList.remove('ready');
-    shell.setAttribute('aria-hidden','true');
-    userBox.hidden = true;
-    if(supportBtn) supportBtn.hidden = false;
-  }
-
-  if(!configured){
-    btn.disabled = true;
-    sendCodeBtn.disabled = true;
-    setStatus('Firebase doit être configuré dans firebase-config.js.', true);
-    return;
-  }
-
-  try {
-    if(!firebase.apps.length) firebase.initializeApp(cfg);
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({prompt:'select_account'});
-
-    btn.addEventListener('click', async () => {
-      btn.disabled = true;
-      setStatus('Ouverture de Google…');
-      try {
-        await auth.signInWithPopup(provider);
-      } catch(err) {
-        console.error(err);
-        setStatus(err && err.message ? err.message : 'Connexion Google impossible.', true);
-      } finally { btn.disabled = false; }
-    });
-
-    function setupRecaptcha(){
-      if(recaptchaVerifier) return;
-      recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        size: 'invisible',
-        callback: function(){},
-        'expired-callback': function(){ setStatus('Le contrôle de sécurité a expiré. Réessaie.', true); }
-      });
-      recaptchaVerifier.render().catch(console.error);
-    }
-
-    sendCodeBtn.addEventListener('click', async () => {
-      const phone = phoneInput.value.trim().replace(/\s+/g,'');
-      if(!/^\+[1-9]\d{7,14}$/.test(phone)){
-        setStatus('Entre le numéro au format international, par exemple +261341234567.', true);
-        phoneInput.focus();
-        return;
-      }
-      sendCodeBtn.disabled = true;
-      setStatus('Envoi du code SMS…');
-      try {
-        setupRecaptcha();
-        confirmationResult = await auth.signInWithPhoneNumber(phone, recaptchaVerifier);
-        codeBox.hidden = false;
-        smsCodeInput.focus();
-        setStatus('Code SMS envoyé. Entre les 6 chiffres reçus.');
-      } catch(err) {
-        console.error(err);
-        if(recaptchaVerifier){
-          try { recaptchaVerifier.clear(); } catch(e){}
-          recaptchaVerifier = null;
-        }
-        setStatus(err && err.message ? err.message : 'Impossible d’envoyer le SMS.', true);
-      } finally { sendCodeBtn.disabled = false; }
-    });
-
-    verifyCodeBtn.addEventListener('click', async () => {
-      const code = smsCodeInput.value.trim();
-      if(!confirmationResult){ setStatus('Demande d’abord un code SMS.', true); return; }
-      if(!/^\d{6}$/.test(code)){ setStatus('Entre le code SMS à 6 chiffres.', true); return; }
-      verifyCodeBtn.disabled = true;
-      setStatus('Vérification du code…');
-      try {
-        await confirmationResult.confirm(code);
-      } catch(err) {
-        console.error(err);
-        setStatus(err && err.message ? err.message : 'Code incorrect ou expiré.', true);
-      } finally { verifyCodeBtn.disabled = false; }
-    });
-
-    logoutBtn.addEventListener('click', () => auth.signOut());
-    auth.onAuthStateChanged(user => { if(previewMode) return; user ? showApp(user) : showGate(); });
-  } catch(err){
-    console.error(err);
-    btn.disabled = true;
-    sendCodeBtn.disabled = true;
-    setStatus('Configuration Firebase invalide.', true);
-  }
+  const gate=document.getElementById('authGate'), shell=document.getElementById('appShell');
+  const googleBtn=document.getElementById('googleLoginBtn'), status=document.getElementById('authStatus');
+  const userBox=document.getElementById('userBox'), userPhoto=document.getElementById('userPhoto'), userName=document.getElementById('userName'), logoutBtn=document.getElementById('logoutBtn');
+  const supportBtn=document.querySelector('.support'), previewBtn=document.getElementById('previewBtn');
+  const loginTab=document.getElementById('loginTab'), signupTab=document.getElementById('signupTab'), title=document.getElementById('authTitle'), subtitle=document.getElementById('authSubtitle');
+  const form=document.getElementById('emailAuthForm'), email=document.getElementById('emailAuthInput'), password=document.getElementById('passwordAuthInput'), confirm=document.getElementById('confirmPasswordInput');
+  const confirmLabel=document.getElementById('confirmPasswordLabel'), confirmWrap=document.getElementById('confirmPasswordWrap'), forgot=document.getElementById('forgotPasswordBtn'), submit=document.getElementById('emailSubmitBtn');
+  const toggle=document.getElementById('togglePasswordBtn'), bottomText=document.getElementById('authBottomText'), bottomAction=document.getElementById('authBottomAction');
+  const phoneToggle=document.getElementById('phoneToggleBtn'), phonePanel=document.getElementById('phoneLoginPanel'), phoneInput=document.getElementById('phoneAuthInput'), sendCodeBtn=document.getElementById('sendCodeBtn'), codeBox=document.getElementById('codeBox'), smsCodeInput=document.getElementById('smsCodeInput'), verifyCodeBtn=document.getElementById('verifyCodeBtn');
+  const cfg=window.ZONEGAME_FIREBASE_CONFIG||{}; let confirmationResult=null, recaptchaVerifier=null, previewMode=false, signupMode=false;
+  const isLocalPreview=(location.protocol==='file:'||location.hostname==='localhost'||location.hostname==='127.0.0.1');
+  if(isLocalPreview&&previewBtn){ previewBtn.hidden=false; previewBtn.addEventListener('click',()=>{previewMode=true;showApp(null);if(window.initAppPreview)window.initAppPreview();}); }
+  function setStatus(msg,error=false){status.textContent=msg;status.classList.toggle('error',error)}
+  function showApp(user){gate.classList.add('hidden');shell.classList.add('ready');shell.setAttribute('aria-hidden','false');if(user){userBox.hidden=false;if(supportBtn)supportBtn.hidden=true;userName.textContent=user.displayName||user.email||user.phoneNumber||'Compte connecté';if(user.photoURL){userPhoto.src=user.photoURL;userPhoto.hidden=false}else userPhoto.hidden=true}else{userBox.hidden=true;if(supportBtn)supportBtn.hidden=false}}
+  function showGate(){gate.classList.remove('hidden');shell.classList.remove('ready');shell.setAttribute('aria-hidden','true');userBox.hidden=true;if(supportBtn)supportBtn.hidden=false}
+  function setMode(signup){signupMode=signup;loginTab.classList.toggle('active',!signup);signupTab.classList.toggle('active',signup);title.textContent=signup?'Créer ton compte':'Content de te revoir';subtitle.textContent=signup?'Inscris-toi pour sauvegarder tes commandes':'Connecte-toi pour continuer';confirmLabel.classList.toggle('visible',signup);confirmWrap.classList.toggle('visible',signup);forgot.classList.toggle('visible',!signup);submit.textContent=signup?'Créer mon compte':'Se connecter';bottomText.textContent=signup?'Déjà un compte ?':'Pas encore de compte ?';bottomAction.textContent=signup?'Se connecter':'Créer un compte';password.autocomplete=signup?'new-password':'current-password';confirm.required=signup;setStatus(signup?'Crée ton compte avec ton email et un mot de passe.':'Choisis une méthode pour continuer.')}
+  loginTab?.addEventListener('click',()=>setMode(false)); signupTab?.addEventListener('click',()=>setMode(true)); bottomAction?.addEventListener('click',()=>setMode(!signupMode));
+  toggle?.addEventListener('click',()=>{password.type=password.type==='password'?'text':'password';toggle.textContent=password.type==='password'?'◉':'◉'});
+  phoneToggle?.addEventListener('click',()=>{phonePanel.hidden=!phonePanel.hidden;phoneToggle.textContent=phonePanel.hidden?'📱 Se connecter par SMS':'✕ Fermer connexion SMS'});
+  if(!cfg.apiKey||!cfg.projectId||!cfg.appId||String(cfg.apiKey).includes('REMPLACE')){googleBtn.disabled=true;submit.disabled=true;sendCodeBtn.disabled=true;setStatus('Firebase doit être configuré dans firebase-config.js.',true);return}
+  try{
+    if(!firebase.apps.length)firebase.initializeApp(cfg); const auth=firebase.auth(); const provider=new firebase.auth.GoogleAuthProvider(); provider.setCustomParameters({prompt:'select_account'});
+    googleBtn.addEventListener('click',async()=>{googleBtn.disabled=true;setStatus('Ouverture de Google…');try{await auth.signInWithPopup(provider)}catch(e){console.error(e);setStatus(e.message||'Connexion Google impossible.',true)}finally{googleBtn.disabled=false}});
+    form.addEventListener('submit',async e=>{e.preventDefault();const em=email.value.trim(),pw=password.value;if(!em||!pw)return;if(signupMode&&pw!==confirm.value){setStatus('Les mots de passe ne correspondent pas.',true);return}submit.disabled=true;setStatus(signupMode?'Création du compte…':'Connexion…');try{if(signupMode)await auth.createUserWithEmailAndPassword(em,pw);else await auth.signInWithEmailAndPassword(em,pw)}catch(err){console.error(err);const map={'auth/invalid-credential':'Email ou mot de passe incorrect.','auth/email-already-in-use':'Cet email est déjà utilisé.','auth/weak-password':'Le mot de passe doit contenir au moins 6 caractères.','auth/invalid-email':'Adresse email invalide.','auth/too-many-requests':'Trop de tentatives. Réessaie plus tard.'};setStatus(map[err.code]||err.message||'Opération impossible.',true)}finally{submit.disabled=false}});
+    forgot.addEventListener('click',async()=>{const em=email.value.trim();if(!em){setStatus('Entre ton email pour recevoir le lien de réinitialisation.',true);email.focus();return}forgot.disabled=true;setStatus('Envoi du lien…');try{await auth.sendPasswordResetEmail(em);setStatus('Lien de réinitialisation envoyé. Vérifie ton email.')}catch(err){setStatus(err.message||'Impossible d’envoyer le lien.',true)}finally{forgot.disabled=false}});
+    function setupRecaptcha(){if(recaptchaVerifier)return;recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'invisible',callback:()=>{},'expired-callback':()=>setStatus('Le contrôle de sécurité a expiré. Réessaie.',true)});recaptchaVerifier.render().catch(console.error)}
+    sendCodeBtn.addEventListener('click',async()=>{const phone=phoneInput.value.trim().replace(/\s+/g,'');if(!/^\+[1-9]\d{7,14}$/.test(phone)){setStatus('Entre le numéro au format international, par exemple +261341234567.',true);return}sendCodeBtn.disabled=true;setStatus('Envoi du code SMS…');try{setupRecaptcha();confirmationResult=await auth.signInWithPhoneNumber(phone,recaptchaVerifier);codeBox.hidden=false;smsCodeInput.focus();setStatus('Code SMS envoyé. Entre les 6 chiffres reçus.')}catch(err){console.error(err);if(recaptchaVerifier){try{recaptchaVerifier.clear()}catch(e){}recaptchaVerifier=null}setStatus(err.message||'Impossible d’envoyer le SMS.',true)}finally{sendCodeBtn.disabled=false}});
+    verifyCodeBtn.addEventListener('click',async()=>{const code=smsCodeInput.value.trim();if(!confirmationResult){setStatus('Demande d’abord un code SMS.',true);return}if(!/^\d{6}$/.test(code)){setStatus('Entre le code SMS à 6 chiffres.',true);return}verifyCodeBtn.disabled=true;setStatus('Vérification du code…');try{await confirmationResult.confirm(code)}catch(err){setStatus(err.message||'Code incorrect ou expiré.',true)}finally{verifyCodeBtn.disabled=false}});
+    logoutBtn.addEventListener('click',()=>auth.signOut()); auth.onAuthStateChanged(user=>{if(previewMode)return;user?showApp(user):showGate()});
+  }catch(err){console.error(err);googleBtn.disabled=true;submit.disabled=true;sendCodeBtn.disabled=true;setStatus('Configuration Firebase invalide.',true)}
 })();
